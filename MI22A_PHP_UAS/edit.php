@@ -43,21 +43,6 @@ if (isset($_POST['simpan'])) {
     $kategori    = $_POST['kategori'];
     $deskripsi   = $_POST['deskripsi'];
     $gambar      = $_POST['gambar'];
-
-
-    if ($nama && $kategori && $deskripsi && $gambar) {
-        if ($op == 'edit') { //untuk update
-            $sql       = "update tbl_produk set kode_produk = '$id', nama_produk='$nama', kategori = '$kategori', deskripsi='$deskripsi', gambar='$gambar' where kode_produk = '$id'";
-            $q1         = mysqli_query($koneksi, $sql);
-            if ($q1) {
-                $sukses = "Data berhasil diupdate";
-            } else {
-                $error  = "Data gagal diupdate";
-            }
-        } else {
-            $error = "Silakan masukkan semua data";
-        }
-    }
 }
 ?>
 
@@ -167,6 +152,25 @@ if (isset($_POST['simpan'])) {
                         <a href="produk.php">Kembali</a>
                     </div>
                 </form>
+                 <?php 
+                if (isset($_POST['simpan'])) {
+                    include 'koneksi.php';
+                    $nama        = $_POST['nama'];
+                    $kategori    = $_POST['kategori'];
+                    $deskripsi   = $_POST['deskripsi'];
+                    $gambar      = $_POST['gambar'];
+
+                    $sql = "UPDATE tbl_produk SET nama_produk = '$nama', kategori = '$kategori', deskripsi = '$deskripsi', gambar = '$gambar' WHERE kode_produk = '$id'; ";
+                    $result = mysqli_query($koneksi, $sql);
+
+                    
+                        if ($q1) {
+                            $sukses     = "Berhasil memasukkan data baru";
+                        } else {
+                            $error      = "Gagal memasukkan data";
+                        }
+                }
+                ?>
             </div>
         </div>
         </div>
